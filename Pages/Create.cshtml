@@ -1,0 +1,84 @@
+﻿@page "/{slug}"
+@using static SkinZoneAppWeb.Models.Skin
+@model SkinZoneAppWeb.Pages.CreateModel
+
+<div class="row pt-5">
+    <div class="col-md-4">
+        <form method="post">
+            <h4>Adicionar Skin</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Skin.Nome" class="control-label"></label>
+                <input asp-for="Skin.Nome" class="form-control" />
+                <span asp-validation-for="Skin.Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Skin.ImagemUri" class="control-label"></label>
+                <input asp-for="Skin.ImagemUri" class="form-control" />
+                <span asp-validation-for="Skin.ImagemUri" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Skin.Preco" class="control-label"></label>
+                <input asp-for="Skin.Preco" class="form-control" />
+                <span asp-validation-for="Skin.Preco" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Skin.Desgaste" class="control-label"></label>
+                <select asp-for="Skin.Desgaste" asp-items="Html.GetEnumSelectList<NivelDesgaste>()" class="form-control">
+                    <option value="">Selecione o nível de desgaste...</option>
+                </select>
+                <span asp-validation-for="Skin.Desgaste" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Skin.DataCadastro" class="control-label"></label>
+                <input asp-for="Skin.DataCadastro" class="form-control" />
+                <span asp-validation-for="Skin.DataCadastro" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3 mb-3">
+                <input class="form-check-input" asp-for="Skin.DisponivelParaRetirada" />
+                <label asp-for="Skin.DisponivelParaRetirada"></label>
+            </div>
+
+            <div class="form-group" id="tradeLockField">
+                <label asp-for="Skin.TradeLock" class="control-label"></label>
+                <input asp-for="Skin.TradeLock" class="form-control" value="0" />
+                <span asp-validation-for="Skin.TradeLock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var disponivelParaRetiradaCheckbox = document.getElementById("Skin_DisponivelParaRetirada");
+            var tradeLockField = document.getElementById("tradeLockField");
+
+            function updateTradeLockVisibility() {
+                tradeLockField.style.display = disponivelParaRetiradaCheckbox.checked ? "none" : "block";
+            }
+
+            disponivelParaRetiradaCheckbox.addEventListener("change", updateTradeLockVisibility);
+
+            updateTradeLockVisibility();
+        });
+    </script>
+
+
+}

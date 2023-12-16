@@ -1,0 +1,37 @@
+﻿@page "/skin/{slug}/{id:int:min(1)}"
+@model SkinZoneAppWeb.Pages.DetailsModel
+
+@{
+    var Skin = Model.Skin;
+}
+
+<h2 class="my-3">@Skin.Nome</h2>
+<div class="row">
+    <div class="col-4">
+        <img class="img-fluid rounded" src="@Skin.ImagemUri">
+    </div>
+    <div class="col-6">
+        <h4 class="my-3">Sobre:</h4>
+        <ul>
+            <li><label asp-for="Skin.Desgaste"></label>: 
+                @Skin.Desgaste</li>
+            <li><label asp-for="Skin.Preco"></label>: 
+                @Html.DisplayFor(model => Skin.Preco)</li>
+            <li>
+                <label asp-for="Skin.DataRetirada"></label>:
+                @if (Skin.DisponivelParaRetirada)
+                {
+                    <span class="text-success">Disponível para retirada imediata</span>
+                }
+                else
+                {
+                    <span class="text-warning"> @Html.DisplayFor(model => Skin.DataRetirada)</span>
+                }
+            </li>
+        </ul>
+        <a class="btn btn-primary"
+           asp-page="/Create"
+           asp-route-slug="@Skin.NomeSlug"
+           asp-route-id="@Skin.SkinId">Editar</a>
+    </div>
+</div>
