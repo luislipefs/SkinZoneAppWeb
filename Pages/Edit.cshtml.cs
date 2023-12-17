@@ -5,11 +5,11 @@ using SkinZoneAppWeb.Services;
 
 namespace SkinZoneAppWeb.Pages
 {
-    public class CreateModel : PageModel
+    public class EditModel : PageModel
     {
         private ISkinService _service;
 
-        public CreateModel(ISkinService service) 
+        public EditModel(ISkinService service)
         {
             _service = service;
         }
@@ -17,11 +17,19 @@ namespace SkinZoneAppWeb.Pages
         [BindProperty]
         public Skin Skin { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet(int id)
         {
+            Skin = _service.Obter(id);
+
+            if (Skin == null)
+            {
+                return NotFound();
+            }
+
+            return Page();
         }
 
-        public IActionResult OnPost() 
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -37,7 +45,16 @@ namespace SkinZoneAppWeb.Pages
                 Skin.TradeLock = 0;
             }
 
-            _service.Incluir(Skin);
+            _service.Alterar(Skin);
+
+            TempData["TempMensagemSucesso"] = true;
+
+            return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnPostExclusao()
+        {
+            _service.Excluir(Skin.SkinId);
 
             return RedirectToPage("/Index");
         }

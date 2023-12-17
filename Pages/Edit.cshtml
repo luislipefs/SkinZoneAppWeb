@@ -1,17 +1,21 @@
-﻿@page "/create"
+﻿@page "/@slug"
 @{
-    ViewData["Title"] = "Inserção de novos itens";
+    ViewData["Title"] = "Edição de Item";
 }
 
 @using static SkinZoneAppWeb.Models.Skin
-@model SkinZoneAppWeb.Pages.CreateModel
+@model SkinZoneAppWeb.Pages.EditModel
+
 
 <div class="row pt-5">
     <div class="col-md-4">
         <form method="post">
-            <h4>Adicionar Skin</h4>
+            <h4>Editar Skin</h4>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Skin.SkinId" />
+
             <div class="form-group">
                 <label asp-for="Skin.Nome" class="control-label"></label>
                 <input asp-for="Skin.Nome" class="form-control" />
@@ -57,6 +61,7 @@
 
             <div class="form-group mt-4">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
+                <input type="submit" value="Excluir" class="btn btn-danger" asp-page-handler="Exclusao"/>
             </div>
         </form>
     </div>

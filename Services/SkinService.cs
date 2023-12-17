@@ -2,10 +2,17 @@
 
 namespace SkinZoneAppWeb.Services
 {
-    public class SkinService
+    public class SkinService : ISkinService
     {
-        public IList<Skin> ObterTodos() 
-            => new List<Skin>()
+
+        public SkinService()
+            => CarregarListaInicial();
+
+        private IList<Skin> _skins;
+
+        private void CarregarListaInicial()
+        {
+            _skins = new List<Skin>()
         {
             new Skin
             {
@@ -141,9 +148,38 @@ namespace SkinZoneAppWeb.Services
             }
 
         };
+        }
+
+        public IList<Skin> ObterTodos()
+            => _skins;
 
         public Skin Obter(int id) 
             => ObterTodos().SingleOrDefault(item => item.SkinId == id);
 
+        public void Incluir(Skin skin)
+        {
+            var proximoId = _skins.Max(item => item.SkinId) + 1;
+            skin.SkinId = proximoId;
+            _skins.Add(skin);
+        }
+
+        public void Alterar(Skin skin)
+        {
+            var skinEncontrada = _skins.SingleOrDefault(item => item.SkinId == skin.SkinId);
+            skinEncontrada.Nome = skin.Nome;
+            skinEncontrada.ImagemUri = skin.ImagemUri;
+            skinEncontrada.Preco = skin.Preco;
+            skinEncontrada.Desgaste = skin.Desgaste;
+            skinEncontrada.DisponivelParaRetirada = skin.DisponivelParaRetirada;
+            skinEncontrada.DataCadastro = skin.DataCadastro;
+            skinEncontrada.DataRetirada = skin.DataRetirada;
+            skinEncontrada.TradeLock = skin.TradeLock;
+        }
+
+        public void Excluir(int id)
+        {
+            var skinEncontrada = Obter(id);
+            _skins.Remove(skinEncontrada);
+        }
     }
 }

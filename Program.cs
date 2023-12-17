@@ -1,7 +1,14 @@
+using SkinZoneAppWeb.Data;
+using SkinZoneAppWeb.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddTransient<ISkinService, SkinService>();
+
+builder.Services.AddDbContext<SkinZoneDbContext>();
 
 var app = builder.Build();
 

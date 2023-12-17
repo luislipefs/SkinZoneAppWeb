@@ -7,12 +7,24 @@ namespace SkinZoneAppWeb.Pages
 {
     public class DetailsModel : PageModel
     {
-        public Skin Skin { get; private set; }
-        public void OnGet(int id)
+
+        private ISkinService _service;
+        public DetailsModel(ISkinService service) 
         {
-            var service = new SkinService();
-            Skin = service.Obter(id);
+            _service = service;
+        }
+
+        public Skin Skin { get; private set; }
+        public IActionResult OnGet(int id)
+        {
+            Skin = _service.Obter(id);
             
+            if (Skin == null)
+            {
+                return NotFound();
+            }
+
+            return Page();
         }
     }
 }

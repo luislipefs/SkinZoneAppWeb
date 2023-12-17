@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SkinZoneAppWeb.Models
 {
@@ -18,6 +19,7 @@ namespace SkinZoneAppWeb.Models
 
         public enum NivelDesgaste
         {
+
             [Display(Name = "Nova de Fábrica")]
             NovaDeFabrica,
 
@@ -33,6 +35,7 @@ namespace SkinZoneAppWeb.Models
             [Display(Name = "Veterana de Guerra")]
             VeteranaDeGuerra
         }
+
         [Display(Name = "Nível de desgaste")]
         [Required(ErrorMessage = "Campo 'Nível de desgaste' obrigatório.")]
         public NivelDesgaste Desgaste { get; set; }
