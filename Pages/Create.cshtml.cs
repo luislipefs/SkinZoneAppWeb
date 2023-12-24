@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace SkinZoneAppWeb.Pages
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         public SelectList TipoOptionItems { get; set; }

@@ -7,7 +7,6 @@ namespace SkinZoneAppWeb.Pages
 {
     public class DetailsModel : PageModel
     {
-
         private ISkinService _service;
         public string DescricaoMarca {  get; set; }
 

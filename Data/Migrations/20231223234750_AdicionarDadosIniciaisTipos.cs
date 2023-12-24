@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using SkinZoneAppWeb.Models;
 
+
 #nullable disable
 
 namespace SkinZoneAppWeb.Data.Migrations

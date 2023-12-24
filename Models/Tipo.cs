@@ -5,7 +5,7 @@
         public int TipoId { get; set; }
         public string Descricao { get; set;}
 
-        public ICollection<Skin> Skins { get; set;}
+        public ICollection<Skin>? Skins { get; set;}
 
     }
 }
