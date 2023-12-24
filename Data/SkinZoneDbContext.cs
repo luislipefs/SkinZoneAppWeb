@@ -6,6 +6,7 @@ namespace SkinZoneAppWeb.Data
     public class SkinZoneDbContext : DbContext
     {
         public DbSet<Skin> Skin { get; set; }
+        public DbSet<Tipo> Tipo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

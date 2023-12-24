@@ -9,6 +9,8 @@ namespace SkinZoneAppWeb.Pages
     {
 
         private ISkinService _service;
+        public string DescricaoMarca {  get; set; }
+
         public DetailsModel(ISkinService service) 
         {
             _service = service;
@@ -18,6 +20,10 @@ namespace SkinZoneAppWeb.Pages
         public IActionResult OnGet(int id)
         {
             Skin = _service.Obter(id);
+            if (Skin.TipoId is not null)
+            {
+                DescricaoMarca = _service.ObterTipo(Skin.TipoId.Value).Descricao;
+            }
             
             if (Skin == null)
             {

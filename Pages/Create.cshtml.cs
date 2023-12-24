@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SkinZoneAppWeb.Models;
 using SkinZoneAppWeb.Services;
+using System.Text.RegularExpressions;
 
 namespace SkinZoneAppWeb.Pages
 {
     public class CreateModel : PageModel
     {
+        public SelectList TipoOptionItems { get; set; }
+
         private ISkinService _service;
 
         public CreateModel(ISkinService service) 
@@ -14,12 +18,15 @@ namespace SkinZoneAppWeb.Pages
             _service = service;
         }
 
-        [BindProperty]
-        public Skin Skin { get; set; }
-
         public void OnGet()
         {
+            TipoOptionItems = new SelectList(_service.ObterTodosTipos(),
+                                                    nameof(Tipo.TipoId),
+                                                nameof(Tipo.Descricao));
         }
+
+        [BindProperty]
+        public Skin Skin { get; set; }
 
         public IActionResult OnPost() 
         {

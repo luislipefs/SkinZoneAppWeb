@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SkinZoneAppWeb.Data;
 
@@ -11,9 +12,11 @@ using SkinZoneAppWeb.Data;
 namespace SkinZoneAppWeb.Data.Migrations
 {
     [DbContext(typeof(SkinZoneDbContext))]
-    partial class SkinZoneDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231223233712_AdicionarTabelaTipo")]
+    partial class AdicionarTabelaTipo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,15 +57,10 @@ namespace SkinZoneAppWeb.Data.Migrations
                     b.Property<double>("Preco")
                         .HasColumnType("float");
 
-                    b.Property<int?>("TipoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TradeLock")
                         .HasColumnType("int");
 
                     b.HasKey("SkinId");
-
-                    b.HasIndex("TipoId");
 
                     b.ToTable("Skin");
                 });
@@ -82,18 +80,6 @@ namespace SkinZoneAppWeb.Data.Migrations
                     b.HasKey("TipoId");
 
                     b.ToTable("Tipo");
-                });
-
-            modelBuilder.Entity("SkinZoneAppWeb.Models.Skin", b =>
-                {
-                    b.HasOne("SkinZoneAppWeb.Models.Tipo", null)
-                        .WithMany("Skins")
-                        .HasForeignKey("TipoId");
-                });
-
-            modelBuilder.Entity("SkinZoneAppWeb.Models.Tipo", b =>
-                {
-                    b.Navigation("Skins");
                 });
 #pragma warning restore 612, 618
         }

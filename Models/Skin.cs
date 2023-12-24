@@ -66,5 +66,7 @@ namespace SkinZoneAppWeb.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DataRetirada { get; set; }
 
+        [Display(Name = "Tipo de Skin")]
+        public int? TipoId { get; set; }
     }
 }

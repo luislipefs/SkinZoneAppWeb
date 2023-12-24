@@ -14,9 +14,11 @@
         <h4 class="my-3">Sobre:</h4>
         <ul>
             <li><label asp-for="Skin.Desgaste"></label>: 
-                @Skin.Desgaste</li>
+                @Skin.Desgaste
+            </li>
             <li><label asp-for="Skin.Preco"></label>: 
-                @Html.DisplayFor(model => Skin.Preco)</li>
+                @Html.DisplayFor(model => Skin.Preco)
+            </li>
             <li>
                 <label asp-for="Skin.DataRetirada"></label>:
                 @if (Skin.DisponivelParaRetirada)
@@ -28,6 +30,15 @@
                     <span class="text-warning"> @Html.DisplayFor(model => Skin.DataRetirada)</span>
                 }
             </li>
+            @if(Model.DescricaoMarca is not null)
+            {
+                <li>
+
+                    <label asp-for="Skin.TipoId"></label>:
+                    @Html.DisplayFor(model => model.DescricaoMarca)
+                </li>
+            }
+
         </ul>
         <a class="btn btn-primary"
            asp-page="/Edit"

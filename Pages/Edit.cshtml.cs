@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SkinZoneAppWeb.Models;
 using SkinZoneAppWeb.Services;
 
@@ -7,6 +8,8 @@ namespace SkinZoneAppWeb.Pages
 {
     public class EditModel : PageModel
     {
+        public SelectList TipoOptionItems { get; set; }
+
         private ISkinService _service;
 
         public EditModel(ISkinService service)
@@ -20,6 +23,10 @@ namespace SkinZoneAppWeb.Pages
         public IActionResult OnGet(int id)
         {
             Skin = _service.Obter(id);
+
+            TipoOptionItems = new SelectList(_service.ObterTodosTipos(),
+                                        nameof(Tipo.TipoId),
+                                        nameof(Tipo.Descricao));
 
             if (Skin == null)
             {

@@ -11,5 +11,8 @@ namespace SkinZoneAppWeb.Services
         void Alterar(Skin skin);
         void Excluir(int id);
 
+        public IList<Tipo> ObterTodosTipos();
+        Tipo ObterTipo(int id);
+
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SkinZoneAppWeb.Data;
 
@@ -11,9 +12,11 @@ using SkinZoneAppWeb.Data;
 namespace SkinZoneAppWeb.Data.Migrations
 {
     [DbContext(typeof(SkinZoneDbContext))]
-    partial class SkinZoneDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231224002256_AdicionarDadosIniciaisSkins")]
+    partial class AdicionarDadosIniciaisSkins
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
