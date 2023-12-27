@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SkinZoneAppWeb.Models;
 
 namespace SkinZoneAppWeb.Data
 {
-    public class SkinZoneDbContext : DbContext
+    public class SkinZoneDbContext : IdentityDbContext
     {
         public DbSet<Skin> Skin { get; set; }
         public DbSet<Tipo> Tipo { get; set; }
